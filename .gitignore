@@ -1,0 +1,64 @@
+# ===============
+# OS Generated
+# ===============
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# ===============
+# Visual Studio / MonoDevelop generated
+# ===============
+[Ee]xported[Oo]bj/
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ===============
+# Unity generated
+# ===============
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+sysinfo.txt
+*.stackdump
+
+# ===============
+# IDEs
+# ===============
+.vscode/
+.idea/
+
+# ===============
+# Unity Cloud Build
+# ===============
+.buildconfig
+
+# ===============
+# Gradle / Android
+# ===============
+.gradle/
+*.gradle
+local.properties
+*.apk
+*.aab
+
+# ===============
+# Outros arquivos binários ou temporários
+# ===============
+*.log
+*.tmp
+*.bak
