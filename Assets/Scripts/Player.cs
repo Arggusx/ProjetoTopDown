@@ -16,8 +16,21 @@ public class Player : MonoBehaviour
     private float initialSpeed;
     private bool _isRunning;
     private bool _isRolling;
+    private bool _isCutting;
     // Direção da movimentação
     private Vector2 _direction;
+
+    public bool isCutting // Encapsulamento
+    {
+        get
+        {
+            return _isCutting;
+        }
+        set
+        {
+            _isCutting = value;
+        }
+    }
 
 
     public bool isRolling
@@ -67,6 +80,7 @@ public class Player : MonoBehaviour
         OnInput();
         OnRolling();
         OnRun();
+        OnCutting();
     }
 
     // Coisas relacionadas a física
@@ -92,6 +106,7 @@ public class Player : MonoBehaviour
         {
             speed = runSpeed;
             _isRunning = true;
+            _isCutting = false; // Modificado
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift)) // Quando "solta" o botão
@@ -99,7 +114,21 @@ public class Player : MonoBehaviour
             speed = initialSpeed;
             _isRunning = false;
         }
+    }
 
+    void OnCutting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _isCutting = true;
+            speed = 0f;
+            _isRunning = false; // Modificado
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _isCutting = false;
+            speed = initialSpeed;
+        }
     }
 
     void OnRolling()
