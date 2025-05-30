@@ -54,6 +54,10 @@ public class PlayerAnim : MonoBehaviour
         { // Indo para a esquerda(-1)
             transform.eulerAngles = new Vector2(0, 180);
         }
+        if (player.isCutting)
+        {
+            anim.SetInteger("transition", 3);
+        }
     }
 
     void OnRun()
