@@ -6,6 +6,8 @@ using UnityEngine.Windows.Speech;
 
 public class Player : MonoBehaviour
 {
+    public bool isPaused;
+
     [SerializeField] private float speed; // Velocidade de movimento normal
     [SerializeField] private float runSpeed; // Velocidade ao correr
 
@@ -42,39 +44,44 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        // Troca o item nas mãos com base na tecla pressionada
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!isPaused)
         {
-            handlingObj = 0; // Ferramenta de corte
-            Debug.Log("Setou 1");
+            // Troca o item nas mãos com base na tecla pressionada
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                handlingObj = 0; // Ferramenta de corte
+                Debug.Log("Pegou o machado");
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                handlingObj = 1; // Pá para cavar
+                Debug.Log("Pegou a pá");
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                handlingObj = 2; // Regador
+                Debug.Log("Pegou o balde");
+            }
+
+
+            // Chama os métodos relacionados a ações
+            OnInput(); // Captura a direção de movimento
+            OnRolling(); // Rolar
+            OnRun(); // Correr
+            OnCutting(); // Cortar
+            OnDig(); // Cavar
+            OnWatering(); // Regar
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            handlingObj = 1; // Pá para cavar
-            Debug.Log("Setou 2");
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            handlingObj = 2; // Regador
-            Debug.Log("Setou 3");
-        }
-
-        Debug.Log("handlingObj: " + handlingObj); // Exibe o item atual
-
-        // Chama os métodos relacionados a ações
-        OnInput(); // Captura a direção de movimento
-        OnRolling(); // Rolar
-        OnRun(); // Correr
-        OnCutting(); // Cortar
-        OnDig(); // Cavar
-        OnWatering(); // Regar
     }
 
     public void FixedUpdate()
     {
-        OnMove(); // Aplica movimentação física
+        if (!isPaused)
+        {
+            OnMove(); // Aplica movimentação física
+        }
     }
 
     #region Movement

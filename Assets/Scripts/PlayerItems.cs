@@ -6,10 +6,11 @@ public class PlayerItems : MonoBehaviour
 {
 
     [Header("Amounts")]
-    // Armazenam as quantidades de cada recuso
-    public int totalWood; // Quantidade total de madeira
-    public int carrots; // Quantidade de cenouras
-    public float currentWater; // Quantidade atual de água
+    // Armazenam as quantidades de cada recuso coletado
+    public int totalWood; // Armazena a quantidade total de madeira coletada
+    public int carrots; // Armazena a quantidade de cenouras coletada
+    public float currentWater; // Armazena a quantidade atual de água coletada
+    public int fishes; // Armazena a quantidade de peixes pescados
 
 
     [Header("Limits")]
@@ -17,6 +18,7 @@ public class PlayerItems : MonoBehaviour
     public float waterLimit = 50;
     public float woodLimit = 5;
     public float carrotLimit = 10;
+    public float fishesLimit = 5f;
 
     public void WaterLimit(float water) // Método para limitar a quantidade de água ao recarregar
     {
