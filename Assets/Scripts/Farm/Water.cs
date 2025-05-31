@@ -1,44 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections; // Biblioteca para corrotinas e coleções
+using System.Collections.Generic; // Suporte para listas e dicionários genéricos
+using UnityEngine; // Biblioteca principal da Unity
 
 public class Water : MonoBehaviour
 {
+    [SerializeField] private bool detectingPlayer; // Verifica se o jogador está na área de detecção
+    [SerializeField] private int waterValue; // Quantidade de água que será adicionada
 
-    [SerializeField] private bool detectingPlayer;
-    [SerializeField] private int waterValue;
+    private PlayerItems player; // Referência ao script PlayerItems
 
-    private PlayerItems player;
-
-
-    // Start is called before the first frame update
+    // Start é chamado antes do primeiro frame
     void Start()
     {
-        player = FindObjectOfType<PlayerItems>();
+        player = FindObjectOfType<PlayerItems>(); // Encontra o objeto com o script PlayerItems na cena
     }
 
-    // Update is called once per frame
+    // Update é chamado a cada frame
     void Update()
     {
-        if (detectingPlayer && Input.GetKeyDown(KeyCode.E))
+        if (detectingPlayer && Input.GetKeyDown(KeyCode.E)) // Se o jogador estiver na área e apertar E
         {
-            player.WaterLimit(waterValue);
+            player.WaterLimit(waterValue); // Adiciona água ao inventário do jogador
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision) // Quando algo entra no gatilho
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // Se for o jogador
         {
-            detectingPlayer = true;
+            detectingPlayer = true; // Marca que o jogador está na área
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision) // Quando algo sai do gatilho
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // Se for o jogador
         {
-            detectingPlayer = false;
+            detectingPlayer = false; // Marca que o jogador saiu da área
         }
     }
 }

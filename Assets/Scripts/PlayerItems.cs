@@ -1,21 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections; // Biblioteca para uso de coleções (como corrotinas)
+using System.Collections.Generic; // Biblioteca para listas e dicionários genéricos
+using UnityEngine; // Biblioteca principal da Unity
 
 public class PlayerItems : MonoBehaviour
 {
 
-    public int totalWood;
-    public float currentWater;
-    public int carrots;
+    [Header("Amounts")]
+    // Armazenam as quantidades de cada recuso
+    public int totalWood; // Quantidade total de madeira
+    public int carrots; // Quantidade de cenouras
+    public float currentWater; // Quantidade atual de água
 
 
-    public void WaterLimit(float water)
+    [Header("Limits")]
+    // Limitadores de recursos encapsulados
+    public float waterLimit = 50;
+    public float woodLimit = 5;
+    public float carrotLimit = 10;
+
+    public void WaterLimit(float water) // Método para limitar a quantidade de água ao recarregar
     {
-        if (currentWater <= 50)
+        if (currentWater <= waterLimit) // Verifica se ainda pode adicionar água
         {
-            currentWater += water;
+            currentWater += water; // Adiciona água ao total atual
         }
-
     }
 }
