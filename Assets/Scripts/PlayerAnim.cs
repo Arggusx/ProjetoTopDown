@@ -9,10 +9,14 @@ public class PlayerAnim : MonoBehaviour
     private Player player; // Referência ao script Player
     private Animator anim; // Referência ao componente Animator
 
+    private Casting cast;
+
     void Start()
     {
         player = GetComponent<Player>(); // Pega o componente Player
         anim = GetComponent<Animator>(); // Pega o componente Animator
+
+        cast = FindObjectOfType<Casting>();
     }
 
     void Update()
@@ -73,6 +77,26 @@ public class PlayerAnim : MonoBehaviour
         {
             anim.SetInteger("transition", 2); // Animação de correr
         }
+    }
+
+
+    public void OnCasting()
+    {
+        cast.OnCasting();
+    }
+
+    // Quando o jogador clica no botão referente a pesca
+    public void OnCastingStarded()
+    {
+        anim.SetTrigger("isCasting");
+        player.isPaused = true;
+    }
+
+    // Chamado quando a animação de pesca termina
+    public void OnCastingEnded()
+    {
+        OnCasting();
+        player.isPaused = false;
     }
 
     #endregion
