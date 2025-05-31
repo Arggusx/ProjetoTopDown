@@ -54,9 +54,20 @@ public class PlayerAnim : MonoBehaviour
         { // Indo para a esquerda(-1)
             transform.eulerAngles = new Vector2(0, 180);
         }
+
         if (player.isCutting)
         {
             anim.SetInteger("transition", 3);
+        }
+
+        if (player.isDigging)
+        {
+            anim.SetInteger("transition", 4);
+        }
+
+        if (player.isWatering)
+        {
+            anim.SetInteger("transition", 5);
         }
     }
 
@@ -67,5 +78,6 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("transition", 2);
         }
     }
+
     #endregion
 }

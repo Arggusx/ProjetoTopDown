@@ -38,6 +38,7 @@ public class NPC_Dialogue : MonoBehaviour
         for (int i = 0; i < dialogue.dialogues.Count; i++)
         {
 
+
             switch (DialogueControl.instance.language)
             {
                 case DialogueControl.idiom.pt:
