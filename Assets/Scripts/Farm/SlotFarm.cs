@@ -1,87 +1,85 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections; // Biblioteca para corrotinas e coleções
+using System.Collections.Generic; // Suporte para listas e dicionários genéricos
+using UnityEngine; // Biblioteca principal da Unity
 
 public class SlotFarm : MonoBehaviour
 {
+    // Todos os atributos que tiver '[SerializeField]' ou 'public' é definido no inspector da Unity
     [Header("Components")]
-    [SerializeField] private Sprite hole;
-    [SerializeField] private Sprite carrot;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite hole; // Define sprite do buraco cavado
+    [SerializeField] private Sprite carrot; // Define sprite da cenoura crescida
+    [SerializeField] private SpriteRenderer spriteRenderer; // Componente responsável por trocar os sprites
 
     [Header("Settings")]
-    [SerializeField] private int digAmount;
-    [SerializeField] private float waterAmount;
-    [SerializeField] private bool detecting;
+    [SerializeField] private int digAmount; // Quantidade de vezes que precisa cavar
+    [SerializeField] private float waterAmount; // Quantidade de água necessária para crescer
+    [SerializeField] private bool detecting; // Se está sendo regado (detecção de água)
 
-    private int inicialDigAmount;
-    private float currentWater;
+    private int inicialDigAmount; // Armazena a quantidade inicial para referência
+    private float currentWater; // Quantidade atual de água acumulada
 
-    PlayerItems playerItems;
+    PlayerItems playerItems; // Referência ao script de itens do jogador para armazenar quantidades em variáveis
 
-    private bool dugHole;
+    private bool dugHole; // Se o buraco já foi cavado
 
     private void Start()
     {
-        playerItems = FindObjectOfType<PlayerItems>();
-        inicialDigAmount = digAmount;
+        playerItems = FindObjectOfType<PlayerItems>(); // Encontra o script PlayerItems na cena
+        inicialDigAmount = digAmount; // Salva o valor inicial da terra para comparação depois
     }
 
     void Update()
     {
-        if (dugHole)
+        if (dugHole) // Se o buraco foi cavado
         {
-            if (detecting)
+            if (detecting) // Se estiver sendo regado
             {
-                currentWater += 0.1f;
+                currentWater += 0.1f; // Acumula água aos poucos
             }
 
-            if (currentWater >= waterAmount) // Atingiu o limite necessário para crescer
+            if (currentWater >= waterAmount) // Se acumulou água suficiente
             {
-                // Plantar cenoura
-                spriteRenderer.sprite = carrot;
+                spriteRenderer.sprite = carrot; // Planta cenoura (muda sprite)
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E)) // Se o jogador apertar E
                 {
-                    spriteRenderer.sprite = hole;
-                    playerItems.carrots++;
-                    currentWater = 0f;
+                    spriteRenderer.sprite = hole; // Volta para o sprite de buraco
+                    playerItems.carrots++; // Dá uma cenoura ao jogador
+                    currentWater = 0f; // Reseta a água para replantar
                 }
             }
         }
     }
 
-    public void OnHit()
+    public void OnHit() // Função chamada quando o jogador cava
     {
+        digAmount--; // Diminui a resistência da terra
 
-        digAmount--;
-        if (digAmount <= inicialDigAmount / 2)
+        if (digAmount <= inicialDigAmount / 2) // Quando cavou metade ou mais
         {
-            spriteRenderer.sprite = hole;
-            dugHole = true;
+            spriteRenderer.sprite = hole; // Mostra o sprite de buraco
+            dugHole = true; // Marca que já pode plantar
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Dig"))
+        if (collision.CompareTag("Dig")) // Se colidir com algo que tenha a tag "Dig"
         {
-            OnHit();
+            OnHit(); // Cava
         }
 
-        if (collision.CompareTag("Water"))
+        if (collision.CompareTag("Water")) // Se colidir com algo com tag "Water"
         {
-            detecting = true;
+            detecting = true; // Começa a regar
         }
     }
 
-
-
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Water"))
+        if (collision.CompareTag("Water")) // Se sair da área de regar
         {
-            detecting = false;
+            detecting = false; // Para de regar
         }
     }
 }
