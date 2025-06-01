@@ -1,13 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
+    [Header("Attacking Settings")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float radius;
+    [SerializeField] private LayerMask enemyLayer;
+
+    private bool isHitting;
+    private float timeCount;
+    private float recoveryTime = 1.5f;
     private Player player; // Referência ao script Player
     private Animator anim; // Referência ao componente Animator
+    private bool isAttacking;
 
     private Casting cast;
 
@@ -23,6 +33,17 @@ public class PlayerAnim : MonoBehaviour
     {
         OnMove(); // Chama a função de movimentação
         OnRun();  // Chama a função de corrida
+
+        if (isHitting)
+        {
+            timeCount += Time.deltaTime; // Contador
+        }
+
+        if (timeCount >= recoveryTime)
+        {
+            isHitting = false; // Toma mais um dano
+            timeCount = 0f; // Zera para reiniciar a contágem
+        }
     }
 
     #region Movement
@@ -69,6 +90,11 @@ public class PlayerAnim : MonoBehaviour
         {
             anim.SetInteger("transition", 5); // Animação de regar
         }
+
+        if (player.isAttacking)
+        {
+            anim.SetInteger("transition", 6);
+        }
     }
 
     void OnRun()
@@ -78,7 +104,28 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("transition", 2); // Animação de correr
         }
     }
+    #endregion
 
+    #region Attack
+
+    public void OnAttack()
+    {
+        // Armazena a posição do colisor da espada, raio e a layer de quem vai ser atacado
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, radius, enemyLayer);
+
+        if (hit != null)
+        {
+            hit.gameObject.GetComponentInChildren<AnimationControll>().OnHit(); // Pega elementos do objeto filho
+            Debug.Log("Atacou o inimigo");
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, radius);
+    }
+
+    #endregion
 
     public void OnCasting()
     {
@@ -108,5 +155,15 @@ public class PlayerAnim : MonoBehaviour
     {
         anim.SetBool("hammering", false);
     }
-    #endregion
+
+    public void OnHit()
+    {
+        if (!isHitting) // Player toma dano
+        {
+            anim.SetTrigger("hit");
+            isHitting = true; // Para de tomar dano
+            player.isRunning = false;
+        }
+    }
+
 }
