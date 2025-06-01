@@ -9,6 +9,7 @@ public class Wood : MonoBehaviour
 
     private float timeCount;  // Tempo que já passou desde que o objeto começou a se mover
 
+    // Update é chamado uma vez por frame
     void Update()
     {
         timeCount += Time.deltaTime; // Soma o tempo que passou desde o último frame
