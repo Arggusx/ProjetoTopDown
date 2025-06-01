@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private bool _isCutting; // Indica se o jogador está cortando
     private bool _isDigging; // Indica se o jogador está cavando
     private bool _isWatering; // Indica se o jogador está regando
+    private bool _isAttacking;
 
     private Vector2 _direction; // Direção da movimentação
 
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     public Vector2 direction { get { return _direction; } set { _direction = value; } }
     public bool isDigging { get { return _isDigging; } set { _isDigging = value; } }
     public bool isWatering { get { return _isWatering; } set { _isWatering = value; } }
+    public bool isAttacking { get { return _isAttacking; } set { _isAttacking = value; } }
 
     private void Start()
     {
@@ -64,6 +66,11 @@ public class Player : MonoBehaviour
                 handlingObj = 2; // Regador
                 Debug.Log("Pegou o balde");
             }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                handlingObj = 3; // Espada
+                Debug.Log("Pegou a espada");
+            }
 
 
             // Chama os métodos relacionados a ações
@@ -73,6 +80,7 @@ public class Player : MonoBehaviour
             OnCutting(); // Cortar
             OnDig(); // Cavar
             OnWatering(); // Regar
+            OnAttacking();
         }
     }
 
@@ -103,6 +111,7 @@ public class Player : MonoBehaviour
             speed = runSpeed; // Aumenta a velocidade
             _isRunning = true;
             _isCutting = false; // Para de cortar se estiver correndo
+            _isAttacking = false;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift)) // Ao soltar Shift
@@ -112,6 +121,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnAttacking()
+    {
+        if (handlingObj == 3) // Se estiver com espada
+        {
+            if (Input.GetMouseButtonDown(0)) // Se clicar botão esquerdo do mouse
+            {
+                speed = 0f; // Para de se mover
+                _isRunning = false; // Para de correr
+                _isAttacking = true;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                speed = initialSpeed; // Volta a se mover
+                _isAttacking = false;
+            }
+        }
+    }
     void OnCutting()
     {
         if (handlingObj == 0) // Se estiver com ferramenta de corte

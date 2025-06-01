@@ -1,4 +1,4 @@
-# Projeto: Monterra - Edição PixelArt
+# Projeto: RPG Topdown
 
 Um jogo autoral inspirado no universo dos RPGs clássicos, totalmente em **pixel art**, desenvolvido como projeto de faculdade. Em *Monterra*, o jogador poderá explorar um mundo aberto que vai muito além dos combates, com mecânicas ricas e envolventes:
 
