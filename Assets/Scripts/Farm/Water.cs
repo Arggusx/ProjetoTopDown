@@ -1,6 +1,6 @@
-﻿using System.Collections; // Biblioteca para corrotinas e coleções
-using System.Collections.Generic; // Suporte para listas e dicionários genéricos
-using UnityEngine; // Biblioteca principal da Unity
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Water : MonoBehaviour
 {

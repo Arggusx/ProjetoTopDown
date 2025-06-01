@@ -95,9 +95,18 @@ public class PlayerAnim : MonoBehaviour
     // Chamado quando a animação de pesca termina
     public void OnCastingEnded()
     {
-        OnCasting();
+        cast.OnCasting();
         player.isPaused = false;
     }
 
+    public void OnHammeringStarted() // Ao começar a contágem de construção, começa a animação
+    {
+        anim.SetBool("hammering", true);
+    }
+
+    public void OnHammeringEnded() // Ao terminar de construir, para a animação
+    {
+        anim.SetBool("hammering", false);
+    }
     #endregion
 }
