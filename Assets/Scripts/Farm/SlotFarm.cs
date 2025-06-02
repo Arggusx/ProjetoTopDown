@@ -5,6 +5,12 @@ using UnityEngine; // Biblioteca principal da Unity
 public class SlotFarm : MonoBehaviour
 {
     // Todos os atributos que tiver '[SerializeField]' ou 'public' é definido no inspector da Unity
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip holeSFX;
+    [SerializeField] private AudioClip carrotSFX;
+
+
     [Header("Components")]
     [SerializeField] private Sprite hole; // Define sprite do buraco cavado
     [SerializeField] private Sprite carrot; // Define sprite da cenoura crescida
@@ -21,6 +27,7 @@ public class SlotFarm : MonoBehaviour
     PlayerItems playerItems; // Referência ao script de itens do jogador para armazenar quantidades em variáveis
 
     private bool dugHole; // Se o buraco já foi cavado
+    private bool plantedCarrot;
 
     private void Start()
     {
@@ -37,16 +44,20 @@ public class SlotFarm : MonoBehaviour
                 currentWater += 0.1f; // Acumula água aos poucos
             }
 
-            if (currentWater >= waterAmount) // Se acumulou água suficiente
+            if (currentWater >= waterAmount && !plantedCarrot) // Se acumulou água suficiente
             {
                 spriteRenderer.sprite = carrot; // Planta cenoura (muda sprite)
+                audioSource.PlayOneShot(holeSFX);
 
-                if (Input.GetKeyDown(KeyCode.E)) // Se o jogador apertar E
-                {
-                    spriteRenderer.sprite = hole; // Volta para o sprite de buraco
-                    playerItems.carrots++; // Dá uma cenoura ao jogador
-                    currentWater = 0f; // Reseta a água para replantar
-                }
+                plantedCarrot = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E)) // Se o jogador apertar E
+            {
+                plantedCarrot = true;
+                audioSource.PlayOneShot(carrotSFX);
+                spriteRenderer.sprite = hole; // Volta para o sprite de buraco
+                playerItems.carrots++; // Dá uma cenoura ao jogador
+                currentWater = 0f; // Reseta a água para replantar
             }
         }
     }
