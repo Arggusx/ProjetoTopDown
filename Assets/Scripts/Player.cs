@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -81,6 +81,11 @@ public class Player : MonoBehaviour
             OnDig(); // Cavar
             OnWatering(); // Regar
             OnAttacking();
+
+            if (Input.GetKeyDown(KeyCode.P)) // Se pressionar 'P', muda de cena
+            {
+                SceneManager.LoadScene("SceneTeste");
+            }
         }
     }
 
