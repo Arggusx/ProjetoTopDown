@@ -9,7 +9,7 @@ public class DialogueControl : MonoBehaviour
     public enum idiom
     {
         pt,
-        ing,
+        eng,
         spa
     }
 
@@ -28,6 +28,12 @@ public class DialogueControl : MonoBehaviour
     [HideInInspector] public bool isShowing; // Para saber  se a janela está aberta
     private int index; // Par saber quantos textos tem em um diálogo
     private string[] sentences;
+    private string[] currentActorName;
+    private Sprite[] actorSprite;
+
+    private Player player;
+
+
 
     public static DialogueControl instance;
 
@@ -38,7 +44,7 @@ public class DialogueControl : MonoBehaviour
 
     void Start()
     {
-
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
@@ -59,24 +65,28 @@ public class DialogueControl : MonoBehaviour
     {
         if (speechText.text == sentences[index]) // Se a frase apareceu por completo
         {
-            if (index == sentences.Length - 1)
+            if (index < sentences.Length - 1)
             {
-                index++;
+                index++; // Contágem de diálogos
+                profileSprite.sprite = actorSprite[index];
+                actorNameText.text = currentActorName[index];
                 speechText.text = "";
                 StartCoroutine(TypeSentence());
             }
             else // Quando termina os textos
             {
-                speechText.text = "";
+                speechText.text = ""; // Qaundo um diálogo acaba, é limpo para o próximo aparecer
+                actorNameText.text = "";
                 index = 0;
                 dialogueObj.SetActive(false);
                 sentences = null;
                 isShowing = false;
+                player.isPaused = false;
             }
         }
     }
 
-    public void Speech(string[] txt) // Chama a fala do NPC
+    public void Speech(string[] txt, string[] actorName, Sprite[] actorProfile) // Chama a fala do NPC
     {
         if (!isShowing) // Para enquanto uma fala continuar, não executar o 'Speech' novamente
         {
@@ -84,6 +94,11 @@ public class DialogueControl : MonoBehaviour
             sentences = txt;
             StartCoroutine(TypeSentence());
             isShowing = true;
+            player.isPaused = true;
+            currentActorName = actorName;
+            actorSprite = actorProfile;
+            profileSprite.sprite = actorSprite[index];
+            actorNameText.text = currentActorName[index];
         }
     }
 

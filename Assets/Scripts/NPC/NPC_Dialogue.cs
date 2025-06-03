@@ -16,6 +16,9 @@ public class NPC_Dialogue : MonoBehaviour
     bool playerHit; // Flag que indica se o jogador está dentro da área de interação
 
     private List<string> sentences = new List<string>(); // Lista que armazena as frases do diálogo em formato de string
+    private List<string> actorName = new List<string>();
+    private List<Sprite> actorSprite = new List<Sprite>();
+
 
     void Start()
     {
@@ -28,7 +31,7 @@ public class NPC_Dialogue : MonoBehaviour
         {
             Debug.Log("Cadê o diálogo");
             // Chama o método que inicia o diálogo, passando as frases como array
-            DialogueControl.instance.Speech(sentences.ToArray());
+            DialogueControl.instance.Speech(sentences.ToArray(), actorName.ToArray(), actorSprite.ToArray());
         }
     }
 
@@ -45,7 +48,7 @@ public class NPC_Dialogue : MonoBehaviour
                     // Adiciona cada frase em português à lista de sentenças
                     sentences.Add(dialogue.dialogues[i].sentences.portuguese);
                     break;
-                case DialogueControl.idiom.ing:
+                case DialogueControl.idiom.eng:
                     // Adiciona cada frase em português à lista de sentenças
                     sentences.Add(dialogue.dialogues[i].sentences.english);
                     break;
@@ -55,8 +58,12 @@ public class NPC_Dialogue : MonoBehaviour
                     break;
             }
 
+            actorName.Add(dialogue.dialogues[i].actorName);
+            actorSprite.Add(dialogue.dialogues[i].profile);
+
+
             // Adiciona cada frase em português à lista de sentenças
-            sentences.Add(dialogue.dialogues[i].sentences.portuguese);
+            //  sentences.Add(dialogue.dialogues[i].sentences.portuguese);
         }
     }
 

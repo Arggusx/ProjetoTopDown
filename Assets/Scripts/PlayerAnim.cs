@@ -54,7 +54,10 @@ public class PlayerAnim : MonoBehaviour
         {
             if (player.isRolling) // Se estiver rolando
             {
-                anim.SetTrigger("isRoll"); // Aciona animação de rolar
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll")) // Se a animação não estiver sendo executada
+                {
+                    anim.SetTrigger("isRoll"); // Aciona animação de rolar
+                }
             }
             else
             {
@@ -99,7 +102,7 @@ public class PlayerAnim : MonoBehaviour
 
     void OnRun()
     {
-        if (player.isRunning) // Se estiver correndo
+        if (player.isRunning && player.direction.sqrMagnitude > 0) // Se estiver correndo
         {
             anim.SetInteger("transition", 2); // Animação de correr
         }
