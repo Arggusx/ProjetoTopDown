@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
-    totalSpriteSurfaceArea: 107008
+    totalSpriteSurfaceArea: 121656
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -127,8 +127,10 @@ SpriteAtlas:
   - {fileID: 7790893247880250612, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: 2664334897872702352, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: 5619324828335755854, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
+  - {fileID: 3997599122274949933, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: -3530134789100802605, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: -6704468165387764942, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
+  - {fileID: 6293044799026020401, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: -4464911821872891754, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: 7842180098592010760, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
   - {fileID: 331582270270235581, guid: dbea165d8a9bd9690b9c30e84d8f16e5, type: 3}
@@ -546,8 +548,10 @@ SpriteAtlas:
   - SunnysideWorld_Tileset_V0.1_59
   - SunnysideWorld_Tileset_V0.1_20
   - SunnysideWorld_Tileset_V0.1_23
+  - SunnysideWorld_Tileset_V0.1_418
   - SunnysideWorld_Tileset_V0.1_22
   - SunnysideWorld_Tileset_V0.1_54
+  - SunnysideWorld_Tileset_V0.1_419
   - SunnysideWorld_Tileset_V0.1_25
   - SunnysideWorld_Tileset_V0.1_55
   - SunnysideWorld_Tileset_V0.1_49
