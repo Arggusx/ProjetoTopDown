@@ -28,6 +28,7 @@ public class SlotFarm : MonoBehaviour
 
     private bool dugHole; // Se o buraco já foi cavado
     private bool plantedCarrot;
+    private bool isPlayer; // É verdadeiro quando o player entra no colisor pré-setado
 
     private void Start()
     {
@@ -51,7 +52,7 @@ public class SlotFarm : MonoBehaviour
 
                 plantedCarrot = true;
             }
-            if (Input.GetKeyDown(KeyCode.E)) // Se o jogador apertar E
+            if (Input.GetKeyDown(KeyCode.E) && plantedCarrot && isPlayer) // Se o jogador apertar E
             {
                 plantedCarrot = true;
                 audioSource.PlayOneShot(carrotSFX);
@@ -84,6 +85,10 @@ public class SlotFarm : MonoBehaviour
         {
             detecting = true; // Começa a regar
         }
+        if (collision.CompareTag("Player"))
+        {
+            isPlayer = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -91,6 +96,10 @@ public class SlotFarm : MonoBehaviour
         if (collision.CompareTag("Water")) // Se sair da área de regar
         {
             detecting = false; // Para de regar
+        }
+        if (collision.CompareTag("Player"))
+        {
+            isPlayer = false;
         }
     }
 }

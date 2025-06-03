@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 
@@ -13,11 +14,15 @@ public class Skeleton : MonoBehaviour
     public float totalHealth;
     public Image helthBar;
     public bool isDead;
+    public float radius;
+    public LayerMask layer;
 
     [Header("Components")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private AnimationControll animControll;
 
+
+    private bool detectPlayer;
     private Player player;
 
     // Start is called before the first frame update
@@ -32,8 +37,9 @@ public class Skeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        if (!isDead && detectPlayer)
         {
+            agent.isStopped = false;
             agent.SetDestination(player.transform.position); // Inimigo anda em direção ao player
 
             if (Vector2.Distance(transform.position, player.transform.position) <= agent.stoppingDistance)
@@ -56,5 +62,33 @@ public class Skeleton : MonoBehaviour
                 transform.eulerAngles = new Vector2(0, 180);
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        DetectPlayer();
+    }
+
+    public void DetectPlayer()
+    {
+        // Distância de detecção do inimigo
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, radius, layer);
+
+        if (hit != null)
+        {
+            detectPlayer = true; // Detectou
+        }
+        else
+        {
+            detectPlayer = false; // Não detectou
+            animControll.PlayAnim(0);
+            agent.isStopped = true;
+        }
+
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

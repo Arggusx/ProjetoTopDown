@@ -142,6 +142,10 @@ public class Player : MonoBehaviour
                 _isAttacking = false;
             }
         }
+        else
+        {
+            isAttacking = false;
+        }
     }
     void OnCutting()
     {
@@ -159,6 +163,10 @@ public class Player : MonoBehaviour
                 speed = initialSpeed; // Volta a se mover
             }
         }
+        else
+        {
+            isCutting = false;
+        }
     }
 
     void OnRolling()
@@ -172,6 +180,7 @@ public class Player : MonoBehaviour
             isRolling = false; // Não pode usar 'Rolar'
         }
     }
+
 
     void OnDig()
     {
@@ -187,6 +196,10 @@ public class Player : MonoBehaviour
                 isDigging = false; // Para de cavar
                 speed = initialSpeed; // Volta a se mover
             }
+        }
+        else
+        {
+            isDigging = false;
         }
     }
 
@@ -213,6 +226,10 @@ public class Player : MonoBehaviour
             {
                 playerItems.currentWater -= 0.1f; // Diminui a água gradualmente
             }
+        }
+        else
+        {
+            isWatering = false;
         }
     }
 

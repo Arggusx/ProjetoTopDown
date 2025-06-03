@@ -15,16 +15,4 @@ MonoBehaviour:
   actor: {fileID: 7411875671060331118, guid: e5f81339f124e700ea1833e060828fb3, type: 3}
   speakerSprite: {fileID: 0}
   sentence: 
-  dialogues:
-  - actorName: Heroi
-    profile: {fileID: -8091321643688609963, guid: 548c9c8c203554ec392d94c38acce62f, type: 3}
-    sentences:
-      portuguese: Oi, tudo bem ?
-      english: Hello, how are you
-      spanish: Hola, que pasa
-  - actorName: "Mo\xE7a"
-    profile: {fileID: 0}
-    sentences:
-      portuguese: Tudo, o que faz por aqui
-      english: I am ok, what you doing
-      spanish: Bien, o que fases aqui
+  dialogues: []
