@@ -49,10 +49,10 @@ public class AnimationControll : MonoBehaviour
     {
         if (skeleton.currentHealth <= 0)
         {
-            anim.SetTrigger("death");
+            anim.SetTrigger("death"); // Animação de morte
             skeleton.isDead = true;
 
-            Destroy(skeleton.gameObject, 1.5f);
+            Destroy(skeleton.gameObject, 1.5f); // Destroi o GameObject do Inimigo
         }
         else
         {
