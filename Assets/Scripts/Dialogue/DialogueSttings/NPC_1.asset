@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf7702b662416d939a64b4e2339f2a5, type: 3}
+  m_Name: NPC_1
+  m_EditorClassIdentifier: 
+  actor: {fileID: 7411875671060331118, guid: e5f81339f124e700ea1833e060828fb3, type: 3}
+  speakerSprite: {fileID: 0}
+  sentence: 
+  dialogues:
+  - actorName: Jasmine
+    profile: {fileID: 0}
+    sentences:
+      portuguese: Bom dia, meu querido. Como esta sua manha ?!
+      english: 
+      spanish: 
+  - actorName: Bob
+    profile: {fileID: 0}
+    sentences:
+      portuguese: Esta tudo tranquilo, acabei de chega na fazenda. To me acostumando
+        com o lugar.
+      english: 
+      spanish: 
+  - actorName: Jasmine
+    profile: {fileID: 0}
+    sentences:
+      portuguese: Bom, espero que voce se adapte bem, e se divirta cuidando da fazenda
+        que seu avo te deu.
+      english: 
+      spanish: 
+  - actorName: Jasmine
+    profile: {fileID: 0}
+    sentences:
+      portuguese: 'Qualquer dia desses, voce pode passar la em casa. Farei uma torta
+        de laranja deliciosa! '
+      english: 
+      spanish: 

@@ -68,8 +68,8 @@ public class DialogueControl : MonoBehaviour
             if (index < sentences.Length - 1)
             {
                 index++; // Contágem de diálogos
-                profileSprite.sprite = actorSprite[index];
-                actorNameText.text = currentActorName[index];
+                //profileSprite.sprite = actorSprite[index];
+                //actorNameText.text = currentActorName[index];
                 speechText.text = "";
                 StartCoroutine(TypeSentence());
             }
