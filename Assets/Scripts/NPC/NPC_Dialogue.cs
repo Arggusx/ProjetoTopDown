@@ -49,11 +49,11 @@ public class NPC_Dialogue : MonoBehaviour
                     sentences.Add(dialogue.dialogues[i].sentences.portuguese);
                     break;
                 case DialogueControl.idiom.eng:
-                    // Adiciona cada frase em português à lista de sentenças
+                    // Adiciona cada frase em inglês à lista de sentenças
                     sentences.Add(dialogue.dialogues[i].sentences.english);
                     break;
                 case DialogueControl.idiom.spa:
-                    // Adiciona cada frase em português à lista de sentenças
+                    // Adiciona cada frase em espanhol à lista de sentenças
                     sentences.Add(dialogue.dialogues[i].sentences.spanish);
                     break;
             }
