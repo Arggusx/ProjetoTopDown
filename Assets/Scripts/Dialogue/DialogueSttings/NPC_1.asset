@@ -23,7 +23,7 @@ MonoBehaviour:
       english: 
       spanish: 
   - actorName: Alex
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: Esta tudo tranquilo, acabei de chega na fazenda. To me acostumando
         com o lugar.
