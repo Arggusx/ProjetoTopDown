@@ -35,19 +35,19 @@ MonoBehaviour:
       english: 
       spanish: 
   - actorName: Alex
-    profile: {fileID: 21300000, guid: 22029e781aed2217cb88e52a3f757177, type: 3}
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: Oi tudo bem ? Eu literalmente acabei de chegar.
       english: 
       spanish: 
-  - actorName: Bob
-    profile: {fileID: 0}
+  - actorName: Alex
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: Eu acho que posso ficar por definitivo aqui.
       english: 
       spanish: 
-  - actorName: Bob
-    profile: {fileID: 0}
+  - actorName: Alex
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: Pois quero cuidar da fazenda do meu avo, e estou sendo muito bem
         acolhido.

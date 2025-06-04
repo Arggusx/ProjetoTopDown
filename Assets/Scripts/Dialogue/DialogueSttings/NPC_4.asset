@@ -23,13 +23,13 @@ MonoBehaviour:
       english: 
       spanish: 
   - actorName: Alex
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: Oi, pode me chamar de Alex.
       english: 
       spanish: 
   - actorName: Alex
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
       portuguese: E... Sim, eu sou novo, mas ja morei por aqui antes.
       english: 
