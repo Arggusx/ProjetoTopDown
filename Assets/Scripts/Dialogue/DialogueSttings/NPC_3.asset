@@ -16,9 +16,34 @@ MonoBehaviour:
   speakerSprite: {fileID: 0}
   sentence: 
   dialogues:
-  - actorName: player
+  - actorName: Maria
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
+    sentences:
+      portuguese: Esta tao creacido !!
+      english: 
+      spanish: 
+  - actorName: Maria
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
+    sentences:
+      portuguese: Opa, rapaz!! Como vai senhour, como voce esta depois de tanto teampo
+        ?!
+      english: 
+      spanish: 
+  - actorName: Alex
     profile: {fileID: 0}
     sentences:
-      portuguese: NPC 3
+      portuguese: 'Ola tia, tudo bem ? '
+      english: 
+      spanish: 
+  - actorName: Alex
+    profile: {fileID: 0}
+    sentences:
+      portuguese: Eu voltei para cuidar da fazenda do meu avo.
+      english: 
+      spanish: 
+  - actorName: Maria
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
+    sentences:
+      portuguese: Seu avo amava a fazenda, cuide bem dela!!
       english: 
       spanish: 

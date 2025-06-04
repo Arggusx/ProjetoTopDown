@@ -17,12 +17,12 @@ MonoBehaviour:
   sentence: 
   dialogues:
   - actorName: Jasmine
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
       portuguese: Bom dia, meu querido. Como esta sua manha ?!
       english: 
       spanish: 
-  - actorName: Bob
+  - actorName: Alex
     profile: {fileID: 0}
     sentences:
       portuguese: Esta tudo tranquilo, acabei de chega na fazenda. To me acostumando
@@ -30,14 +30,14 @@ MonoBehaviour:
       english: 
       spanish: 
   - actorName: Jasmine
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
       portuguese: Bom, espero que voce se adapte bem, e se divirta cuidando da fazenda
         que seu avo te deu.
       english: 
       spanish: 
   - actorName: Jasmine
-    profile: {fileID: 0}
+    profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
       portuguese: 'Qualquer dia desses, voce pode passar la em casa. Farei uma torta
         de laranja deliciosa! '
