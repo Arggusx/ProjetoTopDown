@@ -25,19 +25,19 @@ MonoBehaviour:
   - actorName: Lara
     profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
-      portuguese: Nossa, quanto tempo, que saudade!!!
+      portuguese: Nossa, quanto tempo, que saudade!
       english: 
       spanish: 
   - actorName: Lara
     profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
-      portuguese: Quando voce chegou ? Porque nao avisou que estava vindo ?
+      portuguese: Quando voce chegou? Porque nao avisou que estava vindo?
       english: 
       spanish: 
   - actorName: Alex
     profile: {fileID: 21300000, guid: b87ca18a4d5545e16b0324e2545547c7, type: 3}
     sentences:
-      portuguese: Oi tudo bem ? Eu literalmente acabei de chegar.
+      portuguese: Oi, tudo bem? Eu praticamente acabei de chegar.
       english: 
       spanish: 
   - actorName: Alex
@@ -56,7 +56,7 @@ MonoBehaviour:
   - actorName: Lara
     profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
-      portuguese: Ah!!  que maravilha !! Eu tenho tanto para te mostrar depois de
-        sua partida.
+      portuguese: Ah! Que maravilha! Eu tenho tanto para te mostrar depois de sua
+        partida.
       english: 
       spanish: 
