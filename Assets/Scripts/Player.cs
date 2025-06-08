@@ -72,24 +72,25 @@ public class Player : MonoBehaviour
         if (!isPaused)
         {
             // Troca o item nas mãos com base na tecla pressionada
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 handlingObj = 0; // Ferramenta de corte
                 Debug.Log("Pegou o machado");
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.F2))
             {
                 handlingObj = 1; // Pá para cavar
                 Debug.Log("Pegou a pá");
             }
 
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.F3))
             {
                 handlingObj = 2; // Regador
                 Debug.Log("Pegou o balde");
             }
-            if (Input.GetKeyDown(KeyCode.Z))
+
+            if (Input.GetKeyDown(KeyCode.F4))
             {
                 handlingObj = 3; // Espada
                 Debug.Log("Pegou a espada");
