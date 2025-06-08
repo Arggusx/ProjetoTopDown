@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 
 public class Player : MonoBehaviour
@@ -10,10 +12,18 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed; // Velocidade de movimento normal
     [SerializeField] private float runSpeed; // Velocidade ao correr
+    [Header("Stats")] // Define no inspector da Unity
+    public float currentHealthPlayer;
+    public float totalHealthPlayer;
+    public Image healthBarPlayer;
+    public bool isDead;
 
     private Rigidbody2D rig; // Componente de física 2D
     private PlayerItems playerItems; // Script de itens do jogador
     private HUD_Controller hud_Controller;
+    public Vector3 spawnPoint; // Ponto de renascimento
+    private PlayerAnim playerAnim;
+
 
     private float initialSpeed; // Armazena a velocidade padrão
     private bool _isRunning; // Indica se o jogador está correndo
@@ -35,13 +45,26 @@ public class Player : MonoBehaviour
     public bool isDigging { get { return _isDigging; } set { _isDigging = value; } }
     public bool isWatering { get { return _isWatering; } set { _isWatering = value; } }
     public bool isAttacking { get { return _isAttacking; } set { _isAttacking = value; } }
+    public float isSpeed { get { return speed; } set { speed = value; } }
+    public float isInicialSpeed { get { return initialSpeed; } set { initialSpeed = value; } }
+
+
+    void OnEnable()
+    {
+        currentHealthPlayer = totalHealthPlayer;
+        isDead = false;
+        healthBarPlayer.fillAmount = 1f;
+    }
 
     private void Start()
     {
+        currentHealthPlayer = totalHealthPlayer;
         rig = GetComponent<Rigidbody2D>(); // Acessa o Rigidbody do jogador
         playerItems = GetComponent<PlayerItems>(); // Acessa o script de itens
         hud_Controller = GetComponent<HUD_Controller>();
         initialSpeed = speed; // Salva a velocidade inicial
+        spawnPoint = transform.position; // Posição inicial
+
     }
 
     public void Update()
@@ -86,6 +109,10 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("SceneTeste");
             }
+            //if (Input.GetKeyDown(KeyCode.O)) // Se pressionar 'P', muda de cena
+            //{
+            //    SceneManager.LoadScene("SampleScene");
+            //}
         }
     }
 
@@ -111,6 +138,12 @@ public class Player : MonoBehaviour
 
     void OnRun()
     {
+        if (isDead)
+        {
+            speed = 0f;
+            _isRunning = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift)) // Ao pressionar Shift
         {
             speed = runSpeed; // Aumenta a velocidade
@@ -232,7 +265,6 @@ public class Player : MonoBehaviour
             isWatering = false;
         }
     }
-
 
     #endregion
 }
