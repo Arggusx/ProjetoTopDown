@@ -9,21 +9,20 @@ public class AnimationControll : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private int xpValue;
 
-
+    private Player player;
     private PlayerAnim playerAnim;
     private Animator anim;
     private Skeleton skeleton;
     private PlayerItems playerItems;
-
     private Vector3 startPosition;
     private Quaternion startRotation;
-
 
     private void Start()
     {
         playerItems = FindObjectOfType<PlayerItems>();
         anim = GetComponent<Animator>();
         playerAnim = FindObjectOfType<PlayerAnim>();
+        player = GetComponentInParent<Player>();
         skeleton = GetComponentInParent<Skeleton>(); // Pega elementos do objeto pai
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -55,18 +54,15 @@ public class AnimationControll : MonoBehaviour
 
     public void OnHit()
     {
-        if (skeleton.currentHealth <= 0 && !skeleton.isDead)
+        anim.SetTrigger("hit");
+        skeleton.currentHealth -= 3; // Dano do player
+        skeleton.helthBar.fillAmount = skeleton.currentHealth / skeleton.totalHealth; // Barra de vida dinâmica
+        if (skeleton.currentHealth <= 0 && !skeleton.isDead) // Verifica se realmente morreu
         {
             anim.SetTrigger("death"); // Toca a animação de morte
             skeleton.isDead = true;
-            playerItems.XpLimit(10);
+            playerItems.XpLimit(10); // XP que o player recebe
             StartCoroutine(DieCoroutine()); // Aguarda a animação antes de desativar
-        }
-        else
-        {
-            anim.SetTrigger("hit");
-            skeleton.currentHealth -= 3; // Dano do player
-            skeleton.helthBar.fillAmount = skeleton.currentHealth / skeleton.totalHealth;
         }
     }
 
@@ -84,11 +80,15 @@ public class AnimationControll : MonoBehaviour
 
     void Respawn()
     {
+        // Restaura o movimento após remover
         skeleton.transform.position = startPosition;
         skeleton.transform.rotation = startRotation;
+
+        // Restaura a vida
         skeleton.currentHealth = skeleton.totalHealth;
+
         skeleton.isDead = false;
-        skeleton.helthBar.fillAmount = 1f;
+        skeleton.helthBar.fillAmount = 1f; // Restaura a barra de vida
 
         anim.ResetTrigger("death");
         anim.SetInteger("transition", 0);

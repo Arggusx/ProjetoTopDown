@@ -25,6 +25,8 @@ public class Skeleton : MonoBehaviour
     private bool detectPlayer;
     private Player player;
 
+    public bool isDetecting { get { return detectPlayer; } set { detectPlayer = value; } }
+
     void OnEnable()
     {
         currentHealth = totalHealth;
@@ -81,7 +83,7 @@ public class Skeleton : MonoBehaviour
         // Distância de detecção do inimigo
         Collider2D hit = Physics2D.OverlapCircle(transform.position, radius, layer);
 
-        if (hit != null)
+        if (hit != null && player != null && !player.isDead)
         {
             detectPlayer = true; // Detectou
         }

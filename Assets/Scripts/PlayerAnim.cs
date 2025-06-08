@@ -12,25 +12,41 @@ public class PlayerAnim : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask enemyLayer;
 
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    private Quaternion lastRotation;
+    private bool isDead;
     private bool isHitting;
+    private bool hasPlayedDeathAnim = false;
     private float timeCount;
     private float recoveryTime = 1.5f;
     private Player player; // Referência ao script Player
     private Animator anim; // Referência ao componente Animator
     private bool isAttacking;
 
+    private Skeleton skeleton;
+
     private Casting cast;
 
     void Start()
     {
+        skeleton = GetComponentInParent<Skeleton>();
         player = GetComponent<Player>(); // Pega o componente Player
         anim = GetComponent<Animator>(); // Pega o componente Animator
+        startPosition = transform.position;
+        startRotation = transform.rotation;
 
         cast = FindObjectOfType<Casting>();
     }
 
     void Update()
     {
+        if (player.isDead)
+        {
+            transform.rotation = lastRotation; // ← Impede a rotação após a morte
+            return; // Impede que OnMove/OnRun alterem a rotação
+        }
+
         OnMove(); // Chama a função de movimentação
         OnRun();  // Chama a função de corrida
 
@@ -161,12 +177,55 @@ public class PlayerAnim : MonoBehaviour
 
     public void OnHit()
     {
-        if (!isHitting) // Player toma dano
+        anim.SetTrigger("hit"); //Animação de hit
+        player.currentHealthPlayer -= 3; // Aplica dano ao player
+        player.healthBarPlayer.fillAmount = player.currentHealthPlayer / player.totalHealthPlayer; // Barra de bida
+        if (player.currentHealthPlayer <= 0 && !player.isDead)  // Se tiver com menos de 1 de vida (morto)
         {
-            anim.SetTrigger("hit");
-            isHitting = true; // Para de tomar dano
-            player.isRunning = false;
+            anim.SetTrigger("death"); // Toca a animação de morte
+            player.isDead = true;
+            lastRotation = transform.rotation; // Não permite rotação
+            StartCoroutine(DieCoroutine()); // Aguarda a animação antes de desativar
+
         }
+
     }
+
+    private IEnumerator DieCoroutine()
+    {
+        // Impede movimento durante a morte
+
+        player.direction = Vector2.zero;
+        player.isRunning = false;
+        player.isAttacking = false;
+
+        yield return new WaitForSeconds(2f); // Tempo da animação de morte
+
+        Respawn();
+    }
+
+    void Respawn()
+    {
+        // Reposiciona e reseta rotação
+        player.transform.position = startPosition;
+        player.transform.rotation = startRotation;
+
+        // Restaura a vida
+        player.currentHealthPlayer = player.totalHealthPlayer;
+        player.healthBarPlayer.fillAmount = 1f;
+        player.isDead = false;
+        player.isSpeed = player.isInicialSpeed;
+
+        // Reinicia os triggers e define idle
+        anim.ResetTrigger("death");
+        anim.ResetTrigger("hit"); // se tiver esse
+        anim.SetTrigger("respawn"); // Precisa estar ligado ao retorno ao estado Idle
+
+        anim.SetInteger("transition", 0); // Seta animação de idle ao recascer
+
+        player.gameObject.SetActive(true); // Reativa o objeto do player
+        player.transform.rotation = startRotation; // Volta a rotacionar
+    }
+
 
 }
