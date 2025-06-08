@@ -50714,7 +50714,7 @@ MonoBehaviour:
   runSpeed: 5
   currentHealthPlayer: 0
   totalHealthPlayer: 5
-  healthBarPlayer: {fileID: 0}
+  healthBarPlayer: {fileID: 605302657}
   isDead: 0
   spawnPoint: {x: 0, y: 0, z: 0}
   handlingObj: 0
