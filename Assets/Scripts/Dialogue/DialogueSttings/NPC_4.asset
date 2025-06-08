@@ -19,7 +19,7 @@ MonoBehaviour:
   - actorName: Crystal
     profile: {fileID: 21300000, guid: cf05aada6a1dbf1f58ebc31beb17b0f8, type: 3}
     sentences:
-      portuguese: Ola, voce, por acaso, seria o garotinho novo da aldeia ?
+      portuguese: Ola, voce por acaso seria o garotinho novo da aldeia?
       english: 
       spanish: 
   - actorName: Alex
