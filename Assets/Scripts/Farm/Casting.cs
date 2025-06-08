@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Casting : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject fishPrefab;
+    [SerializeField] private GameObject fishPrefab;
     [SerializeField] private int percentage; // Chance do jogador cpnseguir pegar um peixe
 
     private bool detectingPlayer; // Verifica se o jogador está na área de detecção

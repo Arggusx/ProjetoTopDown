@@ -10,6 +10,7 @@ public class HUD_Controller : MonoBehaviour
     [SerializeField] private Image woodUIBar; // Define sprite da barra de madeira
     [SerializeField] private Image carrotUIBar; // Define sprite da barra de canoura
     [SerializeField] private Image fishUIBar; // Define sprite da barra de canoura
+    [SerializeField] private Image xpUIBar;
 
 
 
@@ -38,6 +39,7 @@ public class HUD_Controller : MonoBehaviour
         woodUIBar.fillAmount = 0f;
         carrotUIBar.fillAmount = 0f;
         fishUIBar.fillAmount = 0f;
+        xpUIBar.fillAmount = 0f;
 
     }
 
@@ -49,6 +51,8 @@ public class HUD_Controller : MonoBehaviour
         woodUIBar.fillAmount = playerItems.totalWood / playerItems.woodLimit;
         carrotUIBar.fillAmount = playerItems.carrots / playerItems.carrotLimit;
         fishUIBar.fillAmount = playerItems.fishes / playerItems.fishesLimit;
+        xpUIBar.fillAmount = (float)playerItems.currentXP / playerItems.xpLimit;
+
 
 
         // toolsUI[player.handlingObj].color = selectColor;

@@ -25,6 +25,13 @@ public class Skeleton : MonoBehaviour
     private bool detectPlayer;
     private Player player;
 
+    void OnEnable()
+    {
+        currentHealth = totalHealth;
+        isDead = false;
+        helthBar.fillAmount = 1f;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
