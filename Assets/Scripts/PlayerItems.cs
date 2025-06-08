@@ -12,6 +12,8 @@ public class PlayerItems : MonoBehaviour
     public float currentWater; // Armazena a quantidade atual de água coletada
     public int fishes; // Armazena a quantidade de peixes pescados
 
+    public int currentLevel = 0;
+    public int currentXP;
 
     [Header("Limits")]
     // Limitadores de recursos encapsulados
@@ -20,11 +22,27 @@ public class PlayerItems : MonoBehaviour
     public float carrotLimit = 10;
     public float fishesLimit = 5f;
 
+    public int xpLimit = 2;
+
     public void WaterLimit(float water) // Método para limitar a quantidade de água ao recarregar
     {
         if (currentWater <= waterLimit) // Verifica se ainda pode adicionar água
         {
             currentWater += water; // Adiciona água ao total atual
+        }
+    }
+
+    public void XpLimit(int xpValue) // Método para limitar a quantidade de água ao recarregar
+    {
+        currentXP += xpValue;
+        Debug.Log("XP Gained: " + xpValue);
+        Debug.Log("XP Total: " + currentXP + " / " + xpLimit);
+        while (currentXP >= xpLimit)
+        {
+            currentXP -= xpLimit;
+            currentLevel++;
+            xpLimit += 2; // Exemplo: dificuldade progressiva
+            Debug.Log("Level Up! Now at level " + currentLevel + ", next XP goal: " + xpLimit);
         }
     }
 }
