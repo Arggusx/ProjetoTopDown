@@ -8,6 +8,7 @@ public class XPUI : MonoBehaviour
 
     private void Update()
     {
-        xpText.text = $"Level: {playerItems.currentLevel} | XP: {playerItems.currentXP}/{playerItems.xpLimit}";
+        float porcentagem = ((float)playerItems.currentXP / playerItems.xpLimit) * 100f;
+        xpText.text = $"Level: {playerItems.currentLevel} | XP: ({porcentagem:F0}%)";
     }
 }
