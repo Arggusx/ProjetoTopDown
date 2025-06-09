@@ -8,6 +8,7 @@ public class lifeBarUI : MonoBehaviour
 
     private void Update()
     {
-        lifeText.text = $"Vida: {player.currentHealthPlayer}/{player.totalHealthPlayer}";
+        float porcentagem = ((float)player.currentHealthPlayer / player.totalHealthPlayer) * 100f;
+        lifeText.text = $"Vida: ({porcentagem:F0}%)";
     }
 }
