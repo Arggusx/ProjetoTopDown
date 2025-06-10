@@ -1,6 +1,6 @@
-# Projeto: RPG Topdown
+# Projeto: RPG Topdown - Monterra
 
-Um jogo autoral inspirado no universo dos RPGs clássicos, totalmente em **pixel art**, desenvolvido como projeto de faculdade. Em *Monterra*, o jogador poderá explorar um mundo aberto que vai muito além dos combates, com mecânicas ricas e envolventes:
+Um jogo autoral inspirado no clássico Stardew Valley, totalmente em **pixel art**, desenvolvido como projeto de faculdade, da matéria Estrutura de Dados Avançada. Em *Monterra*, o jogador poderá explorar um mundo aberto que vai muito além dos combates, com mecânicas ricas e envolventes:
 
 ## Principais Funcionalidades
 
@@ -21,12 +21,13 @@ Um jogo autoral inspirado no universo dos RPGs clássicos, totalmente em **pixel
 
 ## Tecnologias e Estilo
 
+- Feito totalmente na **Unity Engine** 
 - Gráficos 100% originais em **Pixel Art**
 - Gameplay fluido com foco em **exploração e interação com o ambiente**
 - Sistema inspirado em **RPGs clássicos**, com mecânicas integradas e modernas
 
 ---
 
-> Projeto acadêmico desenvolvido como parte da disciplina de Estrutura de Dados.
-> Criado por: Douglas Moreira, Esdras Tarsis, José Charles, João Pugliesi e José Lucas 
-> GitHub: github.com/Arggusx
+> Projeto acadêmico desenvolvido como parte da disciplina de Estrutura de Dados.  
+> Criado por: Douglas Moreira, Esdras Tarsis, José Charles, João Pugliesi e José Lucas.   
+> GitHub: github.com/Arggusx.
