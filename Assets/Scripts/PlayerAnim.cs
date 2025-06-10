@@ -179,7 +179,7 @@ public class PlayerAnim : MonoBehaviour
     {
         anim.SetTrigger("hit"); //Animação de hit
         player.currentHealthPlayer -= 3; // Aplica dano ao player
-        player.healthBarPlayer.fillAmount = player.currentHealthPlayer / player.totalHealthPlayer; // Barra de bida
+
         if (player.currentHealthPlayer <= 0 && !player.isDead)  // Se tiver com menos de 1 de vida (morto)
         {
             anim.SetTrigger("death"); // Toca a animação de morte

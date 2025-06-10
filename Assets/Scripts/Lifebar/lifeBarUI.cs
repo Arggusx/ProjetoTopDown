@@ -10,5 +10,6 @@ public class lifeBarUI : MonoBehaviour
     {
         float porcentagem = ((float)player.currentHealthPlayer / player.totalHealthPlayer) * 100f;
         lifeText.text = $"Vida: ({porcentagem:F0}%)";
+        player.healthBarPlayer.fillAmount = player.currentHealthPlayer / player.totalHealthPlayer; // Barra de bida 
     }
 }

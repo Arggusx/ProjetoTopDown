@@ -13,16 +13,44 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed; // Velocidade de movimento normal
     [SerializeField] private float runSpeed; // Velocidade ao correr
     [Header("Stats")] // Define no inspector da Unity
-    public float currentHealthPlayer;
-    public float totalHealthPlayer;
     public Image healthBarPlayer;
+    public Image hungerBarPlayer;
+    public Image staminBarPlayer;
+
+    [Header("Currents")]
+    public float currentHealthPlayer;
+    public float currentStamina;
+    public float currentHunger;
+
+    [Header("Total")]
+    public float totalHealthPlayer = 50f;
+    public float maxStamina = 50f;
+    public float maxHunger = 50f;
+
+    [Header("Drain Stats")]
+    public float hungerDrainPerSecond = 0.3f;
+    public float staminaDrainPerSecond = 6f;
+    public float healthDecayPerSecond = 0.5f;
+
+    [Header("Regen Stats")]
+    public float staminaRegenPerSecond = 3f;
+    public float healthRegenPerSecond = 1f;
+
+    [Header("Move")]
+    public bool isRun = false;
+    public bool isMoving = false;
+
     public bool isDead;
+
+    public float valueHungryPerFish = 5f;
+    public float valueHungry = 10f;
 
     private Rigidbody2D rig; // Componente de física 2D
     private PlayerItems playerItems; // Script de itens do jogador
     private HUD_Controller hud_Controller;
     public Vector3 spawnPoint; // Ponto de renascimento
     private PlayerAnim playerAnim;
+    private Animator anim;
 
 
     private float initialSpeed; // Armazena a velocidade padrão
@@ -64,6 +92,9 @@ public class Player : MonoBehaviour
         hud_Controller = GetComponent<HUD_Controller>();
         initialSpeed = speed; // Salva a velocidade inicial
         spawnPoint = transform.position; // Posição inicial
+        currentHealthPlayer = totalHealthPlayer;
+        currentStamina = maxStamina;
+        currentHunger = maxHunger;
 
     }
 
@@ -72,29 +103,35 @@ public class Player : MonoBehaviour
         if (!isPaused)
         {
             // Troca o item nas mãos com base na tecla pressionada
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 handlingObj = 0; // Ferramenta de corte
                 Debug.Log("Pegou o machado");
             }
 
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 handlingObj = 1; // Pá para cavar
                 Debug.Log("Pegou a pá");
             }
 
-            if (Input.GetKeyDown(KeyCode.F3))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 handlingObj = 2; // Regador
                 Debug.Log("Pegou o balde");
             }
 
-            if (Input.GetKeyDown(KeyCode.F4))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 handlingObj = 3; // Espada
                 Debug.Log("Pegou a espada");
             }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                foodFish();
+            }
+
+
 
 
             // Chama os métodos relacionados a ações
@@ -105,6 +142,33 @@ public class Player : MonoBehaviour
             OnDig(); // Cavar
             OnWatering(); // Regar
             OnAttacking();
+
+            HandleHunger();
+            HandleStamina();
+            HandleHealth();
+
+            if (_direction.sqrMagnitude > 0.1f)
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
+
+            bool wantsToRun = Input.GetKey(KeyCode.LeftShift);
+
+            if (wantsToRun && currentStamina > 0 && isMoving)
+            {
+                isRunning = true;
+            }
+
+            if (wantsToRun && currentStamina == 0)
+            {
+                isRunning = false;
+                speed = initialSpeed;
+
+            }
 
             if (Input.GetKeyDown(KeyCode.P)) // Se pressionar 'P', muda de cena
             {
@@ -265,6 +329,71 @@ public class Player : MonoBehaviour
         {
             isWatering = false;
         }
+    }
+
+    void foodFish()
+    {
+        if (playerItems.fishes > 0 && currentHunger < maxHunger)
+        {
+            playerItems.fishes--;
+            Comer(valueHungryPerFish);
+            Debug.Log("Comeu um peixe! Peixes restantes: " + playerItems.fishes);
+        }
+        else
+        {
+            Debug.Log("Não pode comer peixe (sem peixe ou fome cheia).");
+        }
+    }
+
+    void UseItem()
+    {
+        Comer(valueHungry);
+        Destroy(gameObject); // ou remover do inventário
+    }
+
+    void HandleHunger()
+    {
+        if (isMoving)
+        {
+            Debug.Log("Ficano cum fome");
+            currentHunger -= hungerDrainPerSecond * Time.deltaTime;
+            currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
+        }
+    }
+
+    void HandleStamina()
+    {
+        bool wantsToRun = Input.GetKey(KeyCode.LeftShift);
+
+        if (isRunning && currentStamina > 0)
+        {
+            currentStamina -= staminaDrainPerSecond * Time.deltaTime;
+        }
+        else if (!isRunning && !wantsToRun)
+        {
+            currentStamina += staminaRegenPerSecond * Time.deltaTime;
+        }
+
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+    }
+
+    void HandleHealth()
+    {
+        if (currentHunger >= maxHunger / 1.5 && currentHealthPlayer < totalHealthPlayer)
+        {
+            currentHealthPlayer += healthRegenPerSecond * Time.deltaTime;
+        }
+        else if (currentHunger <= 0)
+        {
+            currentHealthPlayer -= healthDecayPerSecond * Time.deltaTime;
+        }
+        currentHealthPlayer = Mathf.Clamp(currentHealthPlayer, 0, totalHealthPlayer);
+    }
+
+    public void Comer(float valorFome)
+    {
+        currentHunger += valorFome;
+        currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
     }
 
     #endregion
