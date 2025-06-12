@@ -26,6 +26,17 @@ Um jogo autoral inspirado no clássico Stardew Valley, totalmente em **pixel art
 - Gameplay fluido com foco em **exploração e interação com o ambiente**
 - Sistema inspirado em **RPGs clássicos**, com mecânicas integradas e modernas
 
+  ## Controles
+
+  - Botão E: Pesca na parte superior do lago, coleta de cenouras quando crescidas, contruir casas com a quantidade limite de madeira (6), e coletar água na parte inferior do lago.
+  - Botão F: Se alimenta com peixes, se tiver pelo menos um no inventário.
+  - Botão Q: Para selecionar o machado.
+  - Botão R: Para selecionar a pá.
+  - Botão X: Para selecionar o balde de água.
+  - Botão Z: Para selecionar a espada.
+  - LeftShift: Aciona o Correr.
+  - LeftButtomMouse: Realizar ações. 
+
 ---
 
 > Projeto acadêmico desenvolvido como parte da disciplina de Estrutura de Dados.  
