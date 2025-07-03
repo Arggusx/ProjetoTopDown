@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     public Vector3 spawnPoint; // Ponto de renascimento
     private PlayerAnim playerAnim;
     private Animator anim;
+    private Casting cast;
 
 
     private float initialSpeed; // Armazena a velocidade padrão
@@ -60,6 +61,8 @@ public class Player : MonoBehaviour
     private bool _isDigging; // Indica se o jogador está cavando
     private bool _isWatering; // Indica se o jogador está regando
     private bool _isAttacking;
+    private bool _isCasting;
+
 
     private Vector2 _direction; // Direção da movimentação
 
@@ -73,6 +76,7 @@ public class Player : MonoBehaviour
     public bool isDigging { get { return _isDigging; } set { _isDigging = value; } }
     public bool isWatering { get { return _isWatering; } set { _isWatering = value; } }
     public bool isAttacking { get { return _isAttacking; } set { _isAttacking = value; } }
+    public bool isCasting { get { return _isCasting; } set { _isCasting = value; } }
     public float isSpeed { get { return speed; } set { speed = value; } }
     public float isInicialSpeed { get { return initialSpeed; } set { initialSpeed = value; } }
 
@@ -86,6 +90,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        cast = FindObjectOfType<Casting>();
         currentHealthPlayer = totalHealthPlayer;
         rig = GetComponent<Rigidbody2D>(); // Acessa o Rigidbody do jogador
         playerItems = GetComponent<PlayerItems>(); // Acessa o script de itens
@@ -126,6 +131,13 @@ public class Player : MonoBehaviour
                 handlingObj = 3; // Espada
                 Debug.Log("Pegou a espada");
             }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                handlingObj = 4; // Vara de pesca
+                Debug.Log("Pegou na vara");
+            }
+            
             if (Input.GetKeyDown(KeyCode.F))
             {
                 foodFish();
@@ -142,6 +154,7 @@ public class Player : MonoBehaviour
             OnDig(); // Cavar
             OnWatering(); // Regar
             OnAttacking();
+            // OnCasting();
 
             HandleHunger();
             HandleStamina();
@@ -221,6 +234,28 @@ public class Player : MonoBehaviour
         {
             speed = initialSpeed; // Volta à velocidade normal
             _isRunning = false;
+        }
+    }
+
+     void OnCasting()
+    {
+        if (handlingObj == 4) // Se estiver com espada
+        {
+            if (cast.detectingPlayer && Input.GetMouseButtonDown(0)) // Se clicar botão esquerdo do mouse
+            {
+                speed = 0f; // Para de se mover
+                _isRunning = false; // Para de correr
+                _isCasting = true;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                speed = initialSpeed; // Volta a se mover
+                _isCasting = false;
+            }
+        }
+        else
+        {
+            isCasting = false;
         }
     }
 

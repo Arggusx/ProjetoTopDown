@@ -7,24 +7,26 @@ public class Casting : MonoBehaviour
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private int percentage; // Chance do jogador cpnseguir pegar um peixe
 
-    private bool detectingPlayer; // Verifica se o jogador está na área de detecção
+    public bool detectingPlayer; // Verifica se o jogador está na área de detecção
 
-    private PlayerItems player; // Referência ao script PlayerItems
+    private PlayerItems playerItems; // Referência ao script PlayerItems
     private PlayerAnim playerAnim;
+    private Player player;
 
 
     // Start é chamado antes do primeiro frame
     void Start()
     {
-        player = FindObjectOfType<PlayerItems>(); // Encontra o objeto com o script PlayerItems na cena
-        playerAnim = player.GetComponent<PlayerAnim>();
+        playerItems = FindObjectOfType<PlayerItems>(); // Encontra o objeto com o script PlayerItems na cena
+        playerAnim = playerItems.GetComponent<PlayerAnim>();
     }
 
     // Update é chamado a cada frame
     void Update()
     {
-        if (detectingPlayer && Input.GetKeyDown(KeyCode.E)) // Se o jogador estiver na área e apertar E
+        if (detectingPlayer && Input.GetMouseButtonDown(0)) // Se o jogador estiver na área e apertar E
         {
+            player.OnCasting();
             playerAnim.OnCastingStarded();
         }
     }
